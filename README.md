@@ -65,7 +65,7 @@ The training will start at a low level and does not require in depth knowledge o
 
 ### Duration
 
-Four weeks total.
+Four weeks total (More or less).
 
 Three weeks for guided learning and one week for app development. 
 
