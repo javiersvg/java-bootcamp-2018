@@ -16,15 +16,15 @@ public class PostgresConnection extends Connection {
         super.dbUrl = "jdbc:postgres:"+dbName;
         super.status = false;
         
-        if(pgAdminUser.equals(user)){
+        if(!pgAdminUser.equals(user)){
             return;
         }
         
-        if(pgAdminPassword.equals(password)){
+        if(!pgAdminPassword.equals(password)){
             return;
         }
         
-        status = true;
+        super.status = true;
         
     }
 }

@@ -16,15 +16,15 @@ public class SqlConnection extends Connection {
         super.dbUrl = "jdbc:mysql:"+dbName;
         super.status = false;
         
-        if(sqlAdminUser.equals(user)){
+        if(!sqlAdminUser.equals(user)){
             return;
         }
         
-        if(sqlAdminPassword.equals(password)){
+        if(!sqlAdminPassword.equals(password)){
             return;
         }
         
-        status = true;
+        super.status = true;
         
     }
 }
