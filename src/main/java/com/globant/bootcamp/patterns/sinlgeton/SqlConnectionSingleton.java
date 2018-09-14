@@ -1,4 +1,4 @@
-package com.globant.bootcamp.patterns;
+package com.globant.bootcamp.patterns.sinlgeton;
 
 import com.globant.bootcamp.repository.Connection;
 import com.globant.bootcamp.repository.SqlConnection;
@@ -6,14 +6,14 @@ import com.globant.bootcamp.repository.SqlConnection;
 /**
  * Singleton of a database connection
  */
-public class ConnectionSingleton {
+public class SqlConnectionSingleton {
     
     
     private static Connection instance;
     
-    private ConnectionSingleton(){}
+    private SqlConnectionSingleton(){}
     
-    public static Connection getInstance(String dbName, String user, String password){
+    public static Connection getSqlInstance(String dbName, String user, String password){
         if(instance == null){
             instance = new SqlConnection(dbName, user, password);
         }
