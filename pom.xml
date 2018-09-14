@@ -10,6 +10,7 @@
   
   <properties>
     <skipTests>true</skipTests>
+    <exec.mainClass>com.globant.bootcamp.App</exec.mainClass>
   </properties>
   
   <dependencies>
