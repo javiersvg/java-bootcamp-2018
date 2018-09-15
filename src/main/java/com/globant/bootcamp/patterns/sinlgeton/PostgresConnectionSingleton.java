@@ -7,17 +7,12 @@ import com.globant.bootcamp.repository.PostgresConnection;
  * Singleton of a database connection
  */
 public class PostgresConnectionSingleton {
-    
-    
-    private static Connection instance;
-    
-    private PostgresConnectionSingleton(){}
-    
-    public static Connection getPostgresInstance(String dbName, String user, String password){
-        if(instance == null){
-            instance = new PostgresConnection(dbName, user, password);
-        }
-        return instance;
-    }
-    
+	private static Connection instance;
+
+	public static Connection getPostgresInstance(String dbName, String user, String password) {
+		if (instance == null) {
+			instance = new PostgresConnection(dbName, user, password);
+		}
+		return instance;
+	}
 }

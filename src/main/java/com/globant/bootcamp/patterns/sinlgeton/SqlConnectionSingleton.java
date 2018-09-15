@@ -7,19 +7,12 @@ import com.globant.bootcamp.repository.SqlConnection;
  * Singleton of a database connection
  */
 public class SqlConnectionSingleton {
-    
-    
-    private static Connection instance;
-    
-    private SqlConnectionSingleton(){}
-    
-    public static Connection getSqlInstance(String dbName, String user, String password){
-        if(instance == null){
-            instance = new SqlConnection(dbName, user, password);
-        }
-        return instance;
-    }
-    
+	private static Connection instance;
+
+	public static Connection getSqlInstance(String dbName, String user, String password) {
+		if (instance == null) {
+			instance = new SqlConnection(dbName, user, password);
+		}
+		return instance;
+	}
 }
-
-
