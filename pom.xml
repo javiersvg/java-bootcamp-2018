@@ -12,6 +12,15 @@
     <skipTests>true</skipTests>
     <exec.mainClass>com.globant.bootcamp.App</exec.mainClass>
   </properties>
+
+  <build>
+   <directory>${project.basedir}/target</directory>
+   <resources>
+     <resource>
+       <directory>${project.basedir}/resources</directory>
+     </resource>
+   </resources>
+  </build>
   
   <dependencies>
     <dependency>
@@ -26,4 +35,5 @@
         <scope>test</scope>
     </dependency>
   </dependencies>
+
 </project>

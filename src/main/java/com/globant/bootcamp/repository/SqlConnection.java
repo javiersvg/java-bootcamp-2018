@@ -1,25 +1,31 @@
 package com.globant.bootcamp.repository;
 
+import org.apache.log4j.Logger;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
 /**
  * Stub class for a "sql database connection" with static user and password authentication
  */
 public class SqlConnection extends Connection {
 
-	private static final String SQL_ADMIN_USER = "admin";
-	private static final String SQL_ADMIN_PASSWORD = "admin";
+    final static Logger logger = Logger.getLogger(SqlConnection.class);
 
-	public SqlConnection(String dbName, String user, String password) {
-		super.dbUrl = "jdbc:mysql:" + dbName;
-		super.status = false;
-
-		if (!SQL_ADMIN_USER.equals(user)) {
-			return;
-		}
-
-		if (!SQL_ADMIN_PASSWORD.equals(password)) {
-			return;
-		}
-
-		super.status = true;
+	public SqlConnection(String dbName) {
+		super("jdbc:mysql:" + dbName);
 	}
+	
+	@Override
+	public void connect(Properties credentials) {
+	    ResourceBundle labels = ResourceBundle.getBundle(CREDENTIALS);
+	    String user = labels.getString("mysql.user");
+	    String password = labels.getString("mysql.password");
+	    logger.info("Using stub mysql connection class\n Connecting to mysql server with adress; "+this.getUrl());
+	    this.updateStatus(user.equals(credentials.get("user")) && password.equals(credentials.get("password")));   
+	    if (this.getStatus()){
+	        logger.info("User "+credentials.get("user")+ " connected successfully");
+	    } else {
+	        logger.error("Something went wrong while connecting, incorrect user or password?");
+	    }
+    }
 }

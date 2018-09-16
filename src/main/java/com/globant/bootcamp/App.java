@@ -3,6 +3,8 @@ package com.globant.bootcamp;
 import com.globant.bootcamp.patterns.sinlgeton.SqlConnectionSingleton;
 import com.globant.bootcamp.repository.Connection;
 
+import java.util.Properties;
+
 /**
  * Hello world!
  *
@@ -10,15 +12,11 @@ import com.globant.bootcamp.repository.Connection;
 public class App {
 
 	public static void main(String[] argsStrings) {
-		Connection SqlCon = SqlConnectionSingleton.getSqlInstance("store", "admin", "admin");
-
-		System.out.println("Connecting to:" + SqlCon.getUrl());
-
-		if (SqlCon.getStatus()) {
-			System.out.println("Ready to go");
-		}
-		else {
-			System.out.println("Something went wrong!");
-		}
+	    Properties credentials = new Properties();
+		credentials.put("user", "admin");
+		credentials.put("password", "admin");
+		
+		Connection connection = SqlConnectionSingleton.getSqlInstance("store");
+		connection.connect(credentials);
 	}
 }
