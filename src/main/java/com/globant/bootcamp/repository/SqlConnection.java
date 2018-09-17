@@ -29,6 +29,11 @@ public class SqlConnection implements Connection {
 	    String user = labels.getString("mysql.user");
 	    String password = labels.getString("mysql.password");
 	    logger.info("Using stub mysql connection class\n Connecting to mysql server with adress; "+this.getUrl());
+	    try{
+            Thread.sleep(1000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 	    this.status = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));   
 	    if (this.getStatus()){
 	        logger.info("User "+credentials.get("user")+ " connected successfully");

@@ -6,6 +6,6 @@ import com.globant.bootcamp.repository.Connection;
 public class SqlConnectionFactory extends ConnectionAbstractFactory {
     @Override
     public Connection getConnection(String dbName) {
-        return SqlConnectionSingleton.getSqlInstance(dbName);
+        return SqlConnectionSingleton.getInstance(dbName);
     }
 }

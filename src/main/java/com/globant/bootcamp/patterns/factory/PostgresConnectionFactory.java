@@ -7,6 +7,6 @@ import com.globant.bootcamp.repository.Connection;
 public class PostgresConnectionFactory extends ConnectionAbstractFactory {
     @Override
     public Connection getConnection(String dbName) {
-        return PostgresConnectionSingleton.getPostgresInstance(dbName);
+        return PostgresConnectionSingleton.getInstance(dbName);
     }
 }
