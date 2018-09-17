@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Stub class for a "sql database connection" with static user and password authentication
  */
@@ -29,6 +31,11 @@ public class SqlConnection implements Connection {
 	    String user = labels.getString("mysql.user");
 	    String password = labels.getString("mysql.password");
 	    logger.info("Using stub mysql connection class\n Connecting to mysql server with adress; "+this.getUrl());
+	    try{
+            Thread.sleep(1000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 	    this.status = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));   
 	    if (this.getStatus()){
 	        logger.info("User "+credentials.get("user")+ " connected successfully");

@@ -13,7 +13,7 @@ public class PostgresConnectionSingleton {
 
 	private static Connection instance;
 
-	public static Connection getPostgresInstance(String dbName) {
+	public static Connection getInstance(String dbName) {
 		if (instance == null) {
 			logger.info("Creating static instance of Postgres connection");
 			instance = new PostgresConnection(dbName);
