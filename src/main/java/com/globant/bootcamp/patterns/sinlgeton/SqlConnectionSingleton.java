@@ -13,7 +13,7 @@ public class SqlConnectionSingleton {
 
 	private static Connection instance;
 
-	public static Connection getSqlInstance(String dbName) {
+	public static Connection getInstance(String dbName) {
 		if (instance == null) {
 			logger.info("Creating static instance of Sql connection");
 			instance = new SqlConnection(dbName);

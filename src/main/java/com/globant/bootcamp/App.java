@@ -16,7 +16,7 @@ public class App {
 		credentials.put("user", "admin");
 		credentials.put("password", "admin");
 		
-		Connection connection = SqlConnectionSingleton.getSqlInstance("store");
+		Connection connection = SqlConnectionSingleton.getInstance("store");
 		connection.connect(credentials);
 	}
 }
