@@ -5,8 +5,6 @@ import org.apache.log4j.Logger;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Stub class for a "postgres database connection" with static user and password authentication
  */
