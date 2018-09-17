@@ -1,6 +1,5 @@
 package com.globant.bootcamp.repository.DAO;
 
-
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
