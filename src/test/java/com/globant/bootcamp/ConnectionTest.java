@@ -4,12 +4,13 @@ import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import static org.junit.Assert.assertThat;
 
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -24,6 +25,8 @@ import com.globant.bootcamp.repository.DBType;
 public class ConnectionTest {
 
     final static Logger logger = Logger.getLogger(ConnectionTest.class);
+    
+    private Connection connection;
     
     private final Properties credentials;
     private final String dbName;
@@ -50,10 +53,20 @@ public class ConnectionTest {
         });
     }
     
+    @Before
+    public void createConneciton(){
+        connection = FactoryProducer.getFactory(dbType).getConnection(dbName);
+    }
+    
     @Test
     public void sqlConnect_validUser(){
-        Connection connection = FactoryProducer.getFactory(dbType).getConnection(dbName);
         connection.connect(credentials);
         assertThat(connection.getStatus(),is(equalTo(expected)));
+    }
+    
+    @After
+    public void closeConnection(){
+        logger.info("Clossing connection " + connection.getUrl());
+        //TODO Close connection
     }
 }
