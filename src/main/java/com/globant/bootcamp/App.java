@@ -1,10 +1,9 @@
 package com.globant.bootcamp;
 
-import com.globant.bootcamp.patterns.factory.ConnectionAbstractFactory;
-import com.globant.bootcamp.patterns.factory.FactoryProducer;
+import java.util.Properties;
+
 import com.globant.bootcamp.patterns.sinlgeton.SqlConnectionSingleton;
 import com.globant.bootcamp.repository.Connection;
-import java.util.Properties;
 
 /**
  * Hello world!
