@@ -1,7 +1,7 @@
 package com.globant.bootcamp;
 
-import java.util.Properties;
-
+import com.globant.bootcamp.patterns.builder.ConnectionProperties;
+import com.globant.bootcamp.patterns.builder.ConnectionProperties.ConnectionPropertiesBuilder;
 import com.globant.bootcamp.patterns.sinlgeton.SqlConnectionSingleton;
 import com.globant.bootcamp.repository.Connection;
 
@@ -12,10 +12,9 @@ import com.globant.bootcamp.repository.Connection;
 public class App {
 
 	public static void main(String[] argsStrings) {
-		Properties credentials = new Properties();
-		credentials.put("user", "admin");
-		credentials.put("password", "admin");
+		ConnectionProperties connectionProperties = new ConnectionPropertiesBuilder("admin", "admin").prefetch(true)
+				.createConnectionProperties();
 		Connection connection = SqlConnectionSingleton.getInstance("store");
-		connection.connect(credentials);
+		connection.connect(connectionProperties);
 	}
 }

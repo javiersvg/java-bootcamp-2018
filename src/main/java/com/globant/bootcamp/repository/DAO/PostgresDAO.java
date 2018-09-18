@@ -1,10 +1,9 @@
 package com.globant.bootcamp.repository.DAO;
 
-import java.util.Properties;
-
 import org.apache.log4j.Logger;
 
 import com.globant.bootcamp.model.Model;
+import com.globant.bootcamp.patterns.builder.ConnectionProperties;
 import com.globant.bootcamp.patterns.factory.FactoryProducer;
 import com.globant.bootcamp.repository.Connection;
 import com.globant.bootcamp.repository.DBType;
@@ -14,7 +13,7 @@ public class PostgresDAO implements DAO {
     private final Logger logger = Logger.getLogger(PostgresDAO.class);
     private Connection connection;
     
-    public PostgresDAO(String dbName, Properties credentials) {
+    public PostgresDAO(String dbName, ConnectionProperties credentials) {
         connection = FactoryProducer.getFactory(DBType.POSTGRES).getConnection(dbName);
         connection.connect(credentials);
     }

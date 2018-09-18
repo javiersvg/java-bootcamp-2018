@@ -1,11 +1,11 @@
 package com.globant.bootcamp.patterns.proxy;
 
 import java.util.Date;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
 import com.globant.bootcamp.model.Model;
+import com.globant.bootcamp.patterns.builder.ConnectionProperties;
 import com.globant.bootcamp.repository.DAO.DAO;
 import com.globant.bootcamp.repository.DAO.MySqlDAO;
 
@@ -17,9 +17,9 @@ public class ProxyMySqlDAO implements DAO {
     
     private String dbName;
     
-    private Properties credentials;
+    private ConnectionProperties credentials;
     
-    public ProxyMySqlDAO(String dbName, Properties credentials) {
+    public ProxyMySqlDAO(String dbName, ConnectionProperties credentials) {
         logger.info("Creating proxy at " + new Date());
         this.dbName = dbName;
         this.credentials = credentials;

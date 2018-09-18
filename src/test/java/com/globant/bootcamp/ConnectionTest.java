@@ -1,7 +1,6 @@
 package com.globant.bootcamp;
 
 import java.util.Arrays;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -14,6 +13,8 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
+import com.globant.bootcamp.patterns.builder.ConnectionProperties;
+import com.globant.bootcamp.patterns.builder.ConnectionProperties.ConnectionPropertiesBuilder;
 import com.globant.bootcamp.patterns.factory.FactoryProducer;
 import com.globant.bootcamp.repository.Connection;
 import com.globant.bootcamp.repository.DBType;
@@ -28,16 +29,13 @@ public class ConnectionTest {
     
     private Connection connection;
     
-    private final Properties credentials;
+    private final ConnectionProperties credentials;
     private final String dbName;
     private final Enum<DBType> dbType;
     private final boolean expected;
     
     public ConnectionTest(Enum<DBType> dbType, String dbName, String user, String password, boolean expected){
-        Properties secret = new Properties();
-        secret.put("user", user);
-        secret.put("password", password);
-        this.credentials = secret;
+        this.credentials = new ConnectionPropertiesBuilder(user, password).createConnectionProperties();
         this.dbType = dbType;
         this.dbName = dbName;
         this.expected = expected;

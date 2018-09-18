@@ -2,7 +2,8 @@ package com.globant.bootcamp.repository;
 
 import org.apache.log4j.Logger;
 
-import java.util.Properties;
+import com.globant.bootcamp.patterns.builder.ConnectionProperties;
+
 import java.util.ResourceBundle;
 
 /**
@@ -25,19 +26,19 @@ public class PostgresConnection implements Connection {
 	}
 	
 	@Override
-	public void connect(Properties credentials) {
+	public void connect(ConnectionProperties credentials) {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("postgres.user");
-	    String password = labels.getString("postgres.password");
+	    String password = labels.getString("postgres.password");  
 	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress; "+this.getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-	    this.status = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));
+	    this.status = user.equals(credentials.getUsername()) && password.equals(credentials.getPassword());
 	    if (this.getStatus()){
-	        logger.info("User "+credentials.get("user")+ " connected successfully");
+	        logger.info("User "+credentials.getUsername()+ " connected successfully");
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }
