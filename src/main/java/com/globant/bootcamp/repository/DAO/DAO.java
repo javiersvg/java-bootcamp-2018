@@ -7,12 +7,12 @@ public interface DAO {
 	 * Save an object to persistence storage
 	 * @param  thing to be stored
 	 */
-	public void save(Model thing);
+	void save(Model thing);
 
 	/**
 	 * Load from storage an object
 	 * @param   objectId the string that identifies the stored object
 	 * @return  The object wich id is objectId 
 	 */
-	public Object load(String objectId);
+	Object load(String objectId);
 }

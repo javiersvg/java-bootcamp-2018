@@ -9,12 +9,12 @@ public interface Connection {
 	/**
 	 * Tries to connect to a database using the given properties with keys for "user" and "password"
 	 */
-	public abstract void connect(ConnectionProperties credentials);
+	void connect(ConnectionProperties credentials);
 
 	/**
 	 * @return status: If connection with the database is established 
 	 */
-	public boolean getStatus();
+	boolean getStatus();
 
-	public String getUrl();
+	String getUrl();
 }
