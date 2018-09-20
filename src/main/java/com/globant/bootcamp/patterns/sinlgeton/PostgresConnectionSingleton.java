@@ -18,6 +18,10 @@ public class PostgresConnectionSingleton {
 			logger.info("Creating static instance of Postgres connection");
 			instance = new PostgresConnection(dbName);
 		}
+		if ((instance.getStatus() == false) && instance.getUrl() == null){
+		    logger.info("Replacing closed connection with new instance");
+		    instance = new PostgresConnection(dbName);
+		}
 		return instance;
 	}
 }

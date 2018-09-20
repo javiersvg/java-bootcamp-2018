@@ -44,6 +44,13 @@ public class SqlConnection implements Connection {
     }
     
     @Override
+    public void close() {
+        logger.info("Closing connection for: "+this.dbUrl);
+        this.status = false;
+        this.dbUrl = null;
+    }
+    
+    @Override
     public boolean getStatus() {
         return this.status;
     }

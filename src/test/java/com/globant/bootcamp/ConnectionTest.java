@@ -64,7 +64,6 @@ public class ConnectionTest {
     
     @After
     public void closeConnection(){
-        logger.info("Clossing connection " + connection.getUrl());
-        //TODO Close connection
+        connection.close();
     }
 }

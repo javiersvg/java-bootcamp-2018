@@ -15,6 +15,11 @@ public interface Connection {
 	 * @return status: If connection with the database is established 
 	 */
 	boolean getStatus();
+	
+	/**
+	 * Closes the connection
+	 */
+	void close();
 
 	String getUrl();
 }

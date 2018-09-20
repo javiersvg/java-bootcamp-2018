@@ -18,6 +18,10 @@ public class SqlConnectionSingleton {
 			logger.info("Creating static instance of Sql connection");
 			instance = new SqlConnection(dbName);
 		}
+		if ((instance.getStatus() == false) && instance.getUrl() == null){
+		    logger.info("Replacing closed connection with new instance");
+		    instance = new SqlConnection(dbName);
+		}
 		return instance;
 	}
 }

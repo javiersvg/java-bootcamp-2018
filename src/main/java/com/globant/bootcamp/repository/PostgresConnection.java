@@ -18,7 +18,6 @@ public class PostgresConnection implements Connection {
 	private boolean status;
 
 	public PostgresConnection(String dbName) {
-
 		if (dbName == null) {
 			throw new IllegalArgumentException("Database URL can't be null");
 		}
@@ -42,6 +41,13 @@ public class PostgresConnection implements Connection {
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }
+    }
+    
+    @Override
+    public void close() {
+        logger.info("Closing connection for: "+this.dbUrl);
+        this.status = false;
+        this.dbUrl = null;
     }
     
     @Override
