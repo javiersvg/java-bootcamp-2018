@@ -4,9 +4,9 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import lombok.Getter;
-import lombok.AccessLevel;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.globant.bootcamp.repository.Connection;
 
@@ -15,7 +15,7 @@ import com.globant.bootcamp.repository.Connection;
  */
 public class PostgresConnection implements Connection {
     
-    final static Logger logger = Logger.getLogger(PostgresConnection.class);
+    final static Logger logger = LoggerFactory.getLogger(PostgresConnection.class);
 
 	private static Connection instance;
 	
@@ -44,7 +44,7 @@ public class PostgresConnection implements Connection {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("postgres.user");
 	    String password = labels.getString("postgres.password");
-	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress; "  + getUrl());
+	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress: {}", getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
@@ -52,7 +52,7 @@ public class PostgresConnection implements Connection {
         }
 	    open = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));
 	    if(isOpen()) {
-	        logger.info("User "+credentials.get("user")+ " connected successfully");
+	        logger.info("User {} connected succesfully", credentials.get("user"));
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }

@@ -8,10 +8,10 @@ import java.util.Properties;
 public class App {
 
 	public static void main(String[] argsStrings) {
-	    Properties credentials = new Properties();
+		Properties credentials = new Properties();
 		credentials.put("user", "admin");
 		credentials.put("password", "admin");
-		
+
 		Connection connection = SqlConnection.getInstance("store");
 		connection.connect(credentials);
 	}

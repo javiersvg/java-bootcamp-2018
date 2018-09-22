@@ -5,7 +5,8 @@ import java.util.ResourceBundle;
 
 import lombok.Getter;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.globant.bootcamp.repository.Connection;
 
@@ -16,7 +17,7 @@ public class SqlConnection implements Connection {
 
 	private static Connection instance;
 
-    final static Logger logger = Logger.getLogger(SqlConnection.class);
+    final static Logger logger = LoggerFactory.getLogger(SqlConnection.class);
 
 	@Getter private String Url;
 
@@ -42,7 +43,7 @@ public class SqlConnection implements Connection {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("mysql.user");
 	    String password = labels.getString("mysql.password");
-	    logger.info("Using stub mysql connection class\n Connecting to mysql server with adress; " + getUrl());
+	    logger.info("Using stub mysql connection class\n Connecting to mysql server with adress: {}", getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
@@ -50,7 +51,7 @@ public class SqlConnection implements Connection {
         }
 	    open = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));   
 	    if (isOpen()){
-	        logger.info("User "+credentials.get("user")+ " connected successfully");
+	        logger.info("User {} connected succesfully", credentials.get("user"));
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }
