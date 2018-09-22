@@ -17,7 +17,7 @@ public class SqlConnection implements Connection {
 
 	private static Connection instance;
 
-    final static Logger logger = LoggerFactory.getLogger(SqlConnection.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(SqlConnection.class);
 
 	@Getter private String Url;
 
@@ -32,7 +32,7 @@ public class SqlConnection implements Connection {
 
 	public static Connection getInstance(String dbName) {
 		if (instance == null) {
-			logger.info("Creating static instance of Sql connection");
+			LOGGER.info("Creating static instance of Sql connection");
 			instance = new SqlConnection(dbName);
 		}
 		return instance;
@@ -43,7 +43,7 @@ public class SqlConnection implements Connection {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("mysql.user");
 	    String password = labels.getString("mysql.password");
-	    logger.info("Using stub mysql connection class\n Connecting to mysql server with adress: {}", getUrl());
+	    LOGGER.info("Using stub mysql connection class\n Connecting to mysql server with adress: {}", getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
@@ -51,9 +51,9 @@ public class SqlConnection implements Connection {
         }
 	    open = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));   
 	    if (isOpen()){
-	        logger.info("User {} connected succesfully", credentials.get("user"));
+	        LOGGER.info("User {} connected succesfully", credentials.get("user"));
 	    } else {
-	        logger.error("Something went wrong while connecting, incorrect user or password?");
+	        LOGGER.error("Something went wrong while connecting, incorrect user or password?");
 	    }
     }
 }
