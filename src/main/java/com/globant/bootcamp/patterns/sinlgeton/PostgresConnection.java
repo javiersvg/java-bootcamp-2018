@@ -1,9 +1,14 @@
-package com.globant.bootcamp.repository;
-
-import org.apache.log4j.Logger;
+package com.globant.bootcamp.patterns.sinlgeton;
 
 import java.util.Properties;
 import java.util.ResourceBundle;
+
+import lombok.Getter;
+import lombok.AccessLevel;
+
+import org.apache.log4j.Logger;
+
+import com.globant.bootcamp.repository.Connection;
 
 /**
  * Stub class for a "postgres database connection" with static user and password authentication
@@ -11,17 +16,27 @@ import java.util.ResourceBundle;
 public class PostgresConnection implements Connection {
     
     final static Logger logger = Logger.getLogger(PostgresConnection.class);
-    
-    private String dbUrl;
 
-	private boolean status;
+	private static Connection instance;
+	
+	@Getter private String url;
+	
+	@Getter private boolean open;
 
-	public PostgresConnection(String dbName) {
+	private PostgresConnection(String dbName) {
 
 		if (dbName == null) {
 			throw new IllegalArgumentException("Database URL can't be null");
 		}
-		this.dbUrl = "jdbc:postgres:" + dbName;
+		this.url = "jdbc:postgres:" + dbName;
+	}
+
+	public static Connection getInstance(String dbName) {
+		if (instance == null) {
+			logger.info("Creating static instance of Postgres connection");
+			instance = new PostgresConnection(dbName);
+		}
+		return instance;
 	}
 	
 	@Override
@@ -29,27 +44,17 @@ public class PostgresConnection implements Connection {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("postgres.user");
 	    String password = labels.getString("postgres.password");
-	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress; "+this.getUrl());
+	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress; "  + getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-	    this.status = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));
-	    if (this.getStatus()){
+	    open = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));
+	    if(isOpen()) {
 	        logger.info("User "+credentials.get("user")+ " connected successfully");
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }
-    }
-    
-    @Override
-    public boolean getStatus() {
-        return status;
-    }
-    
-    @Override
-    public String getUrl() {
-        return dbUrl;
     }
 }
