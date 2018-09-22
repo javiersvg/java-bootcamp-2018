@@ -1,15 +1,13 @@
 package com.globant.bootcamp.repository;
 
-import com.globant.bootcamp.patterns.builder.ConnectionProperties;
-
 /**
  * Contract for the Connection class
  */
 public interface Connection {
 	/**
-	 * Tries to connect to a database using the given properties with keys for "user" and "password"
+	 * Tries to connect to a database
 	 */
-	void connect(ConnectionProperties credentials);
+	void connect();
 
 	/**
 	 * @return status: If connection with the database is established 

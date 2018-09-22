@@ -13,31 +13,32 @@ public class PostgresConnection implements Connection {
     
     final static Logger logger = Logger.getLogger(PostgresConnection.class);
     
-    private String dbUrl;
+    private ConnectionProperties properties;
 
 	private boolean status;
 
-	public PostgresConnection(String dbName) {
-		if (dbName == null) {
-			throw new IllegalArgumentException("Database URL can't be null");
+
+	public PostgresConnection(ConnectionProperties properties) {
+		if (properties == null) {
+			throw new IllegalArgumentException("Properties can't be null");
 		}
-		this.dbUrl = "jdbc:postgres:" + dbName;
+		this.properties = properties;
 	}
 	
 	@Override
-	public void connect(ConnectionProperties credentials) {
+	public void connect() {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("postgres.user");
 	    String password = labels.getString("postgres.password");  
-	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress; "+this.getUrl());
+	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress; " + this.getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-	    this.status = user.equals(credentials.getUsername()) && password.equals(credentials.getPassword());
+	    this.status = user.equals(properties.getUsername()) && password.equals(properties.getPassword());
 	    if (this.getStatus()){
-	        logger.info("User "+credentials.getUsername()+ " connected successfully");
+	        logger.info("User " + properties.getUsername()+ " connected successfully");
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }
@@ -45,9 +46,8 @@ public class PostgresConnection implements Connection {
     
     @Override
     public void close() {
-        logger.info("Closing connection for: "+this.dbUrl);
+        logger.info("Closing connection for: " + this.getUrl());
         this.status = false;
-        this.dbUrl = null;
     }
     
     @Override
@@ -57,6 +57,6 @@ public class PostgresConnection implements Connection {
     
     @Override
     public String getUrl() {
-        return dbUrl;
+        return this.properties.getUrl();
     }
 }

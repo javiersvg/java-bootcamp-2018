@@ -3,19 +3,16 @@ package com.globant.bootcamp.repository.DAO;
 import org.apache.log4j.Logger;
 
 import com.globant.bootcamp.model.Model;
-import com.globant.bootcamp.patterns.builder.ConnectionProperties;
-import com.globant.bootcamp.patterns.factory.FactoryProducer;
 import com.globant.bootcamp.repository.Connection;
-import com.globant.bootcamp.repository.DBType;
 
-public class MySqlDAO implements DAO {
+public class SqlDAO implements DAO {
     
-    private final Logger logger = Logger.getLogger(MySqlDAO.class);
+    private final Logger logger = Logger.getLogger(SqlDAO.class);
     private Connection connection;
     
-    public MySqlDAO(String dbName, ConnectionProperties credentials) {
-        connection = FactoryProducer.getFactory(DBType.MYSQL).getConnection(dbName);
-        connection.connect(credentials);
+    public SqlDAO(Connection connection) {
+        this.connection = connection;
+        connection.connect();
     }
     
     @Override

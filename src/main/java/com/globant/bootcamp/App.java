@@ -12,9 +12,9 @@ import com.globant.bootcamp.repository.Connection;
 public class App {
 
 	public static void main(String[] argsStrings) {
-		ConnectionProperties connectionProperties = new ConnectionPropertiesBuilder("admin", "admin").prefetch(true)
+		ConnectionProperties connectionProperties = new ConnectionPropertiesBuilder("jdbc:mysql:store","admin", "admin").prefetch(true)
 				.createConnectionProperties();
-		Connection connection = SqlConnectionSingleton.getInstance("store");
-		connection.connect(connectionProperties);
+		Connection connection = SqlConnectionSingleton.getInstance(connectionProperties);
+		connection.connect();
 	}
 }

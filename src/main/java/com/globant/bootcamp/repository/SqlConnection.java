@@ -13,19 +13,19 @@ public class SqlConnection implements Connection {
 
     final static Logger logger = Logger.getLogger(SqlConnection.class);
 
-	private String dbUrl;
+    private ConnectionProperties properties;
 
 	private boolean status;
 
-	public SqlConnection(String dbName) {
-		if (dbName == null) {
-			throw new IllegalArgumentException("Database URL can't be null");
+	public SqlConnection(ConnectionProperties properties) {
+		if (properties == null) {
+			throw new IllegalArgumentException("Properties can't be nul");
 		}
-		this.dbUrl = "mysql:postgres:" + dbName;
+		this.properties = properties;
 	}
 	
 	@Override
-	public void connect(ConnectionProperties credentials) {
+	public void connect() {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("mysql.user");
 	    String password = labels.getString("mysql.password");
@@ -35,9 +35,9 @@ public class SqlConnection implements Connection {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-	    this.status = user.equals(credentials.getUsername()) && password.equals(credentials.getPassword());   
+	    this.status = user.equals(properties.getUsername()) && password.equals(properties.getPassword());   
 	    if (this.getStatus()){
-	        logger.info("User "+credentials.getUsername()+ " connected successfully");
+	        logger.info("User "+properties.getUsername()+ " connected successfully");
 	    } else {
 	        logger.error("Something went wrong while connecting, incorrect user or password?");
 	    }
@@ -45,9 +45,8 @@ public class SqlConnection implements Connection {
     
     @Override
     public void close() {
-        logger.info("Closing connection for: "+this.dbUrl);
+        logger.info("Closing connection for: "+this.getUrl());
         this.status = false;
-        this.dbUrl = null;
     }
     
     @Override
@@ -57,6 +56,6 @@ public class SqlConnection implements Connection {
     
     @Override
     public String getUrl() {
-        return this.dbUrl;
+        return this.properties.getUrl();
     }
 }

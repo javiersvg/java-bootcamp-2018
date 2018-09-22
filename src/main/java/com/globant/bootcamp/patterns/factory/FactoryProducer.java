@@ -5,7 +5,6 @@ import com.globant.bootcamp.repository.DBType;
 public class FactoryProducer {
     
    public static ConnectionAbstractFactory getFactory(Enum<DBType> choice){
-   
       if(choice.equals(DBType.MYSQL)){
          return new SqlConnectionFactory();
          

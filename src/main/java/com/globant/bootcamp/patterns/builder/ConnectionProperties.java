@@ -1,59 +1,66 @@
 package com.globant.bootcamp.patterns.builder;
 
-import java.util.Properties;
 
 /**
  * Builder class for creating connection properties with optional parameters
  * Only username and password are required
  */
-@SuppressWarnings("serial")
-public class ConnectionProperties extends Properties{
-    
-	private static final String usernameKey = "username";
+public class ConnectionProperties {
 
-	private static final String passwordKey = "password";
+	private final String dbUrl;
 
-	private static final String prefetchKey = "prefetch";
+	private final String username;
 
-	private static final String errorsKey = "errors";
+	private final String password;
 
-	private static final String dateFormatKey = "date_format";
-	
-	private ConnectionProperties(final String username, final String password, final boolean prefetch,
-		       String errors, String dateFormat) {
-	    super();
-		this.setProperty(usernameKey, username);
-		this.setProperty(passwordKey, password);
-		this.setProperty(prefetchKey, String.valueOf(prefetch));
-		this.setProperty(errorsKey, String.valueOf(errors));
-		this.setProperty(dateFormatKey, String.valueOf(dateFormat));
+	private final boolean prefetch;
+
+	private final String errors;
+
+	private final String dateFormat;
+
+	private ConnectionProperties(final String dbUrl, final String username, final String password,
+			final boolean prefetch, final String errors, final String dateFormat) {
+		this.dbUrl = dbUrl;
+		this.username = username;
+		this.password = password;
+		this.prefetch = prefetch;
+		this.errors = errors;
+		this.dateFormat = dateFormat;
+	}
+
+	public String getUrl() {
+		return this.dbUrl;
 	}
 
 	public String getDateFormat() {
-		return super.getProperty(dateFormatKey);
+		return this.dateFormat;
 	}
 
 	public String getUsername() {
-		return super.getProperty(usernameKey);
+		return this.username;
 	}
 
 	public String getPassword() {
-		return super.getProperty(passwordKey);
+		return this.password;
 	}
 
 	public String getErrors() {
-		return super.getProperty(errorsKey);
+		return this.errors;
 	}
 
 	public boolean getPrefetch() {
-		return Boolean.parseBoolean(super.getProperty(prefetchKey));
+		return this.prefetch;
 	}
 
 	public static class ConnectionPropertiesBuilder {
+
+		private final String nestedDbUrl;
+
 		private final String nestedUsername;
 
 		private final String nestedPassword;
-		
+
 		private boolean nestedPrefetch;
 
 		private String nestedErrors;
@@ -61,11 +68,12 @@ public class ConnectionProperties extends Properties{
 		private String nestedDateFormat;
 
 		/* Obligatory fields */
-		public ConnectionPropertiesBuilder(final String newUsername, final String newPassword) {
+		public ConnectionPropertiesBuilder(final String newDbUrl, final String newUsername, final String newPassword) {
+			this.nestedDbUrl = newDbUrl;
 			this.nestedUsername = newUsername;
 			this.nestedPassword = newPassword;
 		}
-
+        
 		public ConnectionPropertiesBuilder prefetch(final boolean newPrefetch) {
 			this.nestedPrefetch = newPrefetch;
 			return this;
@@ -82,7 +90,7 @@ public class ConnectionProperties extends Properties{
 		}
 
 		public ConnectionProperties createConnectionProperties() {
-			return new ConnectionProperties(nestedUsername, nestedPassword, nestedPrefetch, nestedErrors,
+			return new ConnectionProperties(nestedDbUrl, nestedUsername, nestedPassword, nestedPrefetch, nestedErrors,
 					nestedDateFormat);
 		}
 	}
