@@ -15,7 +15,7 @@ import com.globant.bootcamp.repository.Connection;
  */
 public class PostgresConnection implements Connection {
     
-    final static Logger logger = LoggerFactory.getLogger(PostgresConnection.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(PostgresConnection.class);
 
 	private static Connection instance;
 	
@@ -33,7 +33,7 @@ public class PostgresConnection implements Connection {
 
 	public static Connection getInstance(String dbName) {
 		if (instance == null) {
-			logger.info("Creating static instance of Postgres connection");
+			LOGGER.info("Creating static instance of Postgres connection");
 			instance = new PostgresConnection(dbName);
 		}
 		return instance;
@@ -44,7 +44,7 @@ public class PostgresConnection implements Connection {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("postgres.user");
 	    String password = labels.getString("postgres.password");
-	    logger.info("Using stub postgres connection class\n Connecting to mysql server with adress: {}", getUrl());
+	    LOGGER.info("Using stub postgres connection class\n Connecting to mysql server with adress: {}", getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
@@ -52,9 +52,9 @@ public class PostgresConnection implements Connection {
         }
 	    open = user.equals(credentials.get("user")) && password.equals(credentials.get("password"));
 	    if(isOpen()) {
-	        logger.info("User {} connected succesfully", credentials.get("user"));
+	        LOGGER.info("User {} connected succesfully", credentials.get("user"));
 	    } else {
-	        logger.error("Something went wrong while connecting, incorrect user or password?");
+	        LOGGER.error("Something went wrong while connecting, incorrect user or password?");
 	    }
     }
 }
