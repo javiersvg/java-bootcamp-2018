@@ -14,7 +14,7 @@ public class FactoryProducer {
 			selectedFactory = new PostgresConnectionFactory();
 			break;
 		default:
-		    selectedFactory = new NullConnectionFactory();
+			selectedFactory = new NullConnectionFactory();
 			break;
 		}
 		return selectedFactory;

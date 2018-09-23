@@ -1,5 +1,6 @@
 package com.globant.bootcamp.patterns.sinlgeton;
 
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.globant.bootcamp.patterns.builder.ConnectionProperties;
 import com.globant.bootcamp.repository.Connection;
 
 /**
@@ -19,21 +19,21 @@ public class SqlConnection implements Connection {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SqlConnection.class);
     
-    private ConnectionProperties properties;
+    private Properties properties;
 
 	@Getter private String url;
 
 	@Getter private boolean open;
 
-	public SqlConnection(ConnectionProperties properties) {
+	public SqlConnection(Properties properties) {
 		if (properties == null) {
 			throw new IllegalArgumentException("Properties can't be null");
 		}
 		this.properties = properties;
-		url = properties.getUrl();
+		url = properties.getProperty(PropertiesKey.URL.name());
 	}
 
-	public static Connection getInstance(ConnectionProperties properties) {
+	public static Connection getInstance(Properties properties) {
 		if (instance == null) {
 			LOGGER.info("Creating static instance of Sql connection");
 			instance = new SqlConnection(properties);
@@ -52,9 +52,9 @@ public class SqlConnection implements Connection {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-	    open = user.equals(properties.getUsername()) && password.equals(properties.getPassword());   
+	    open = user.equals(properties.getProperty(PropertiesKey.USER.name())) && password.equals(properties.getProperty(PropertiesKey.PASSWORD.name()));   
 	    if (isOpen()){
-	        LOGGER.info("User {} connected succesfully", properties.getUsername());
+	        LOGGER.info("User {} connected succesfully", properties.getProperty(PropertiesKey.USER.name()));
 	    } else {
 	        LOGGER.error("Something went wrong while connecting, incorrect user or password?");
 	    }
