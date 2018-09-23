@@ -1,6 +1,5 @@
 package com.globant.bootcamp.patterns.builder;
 
-
 /**
  * Builder class for creating connection properties with optional parameters
  * Only username and password are required

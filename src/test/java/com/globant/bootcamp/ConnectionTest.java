@@ -1,17 +1,16 @@
 package com.globant.bootcamp;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 
 import com.globant.bootcamp.patterns.builder.ConnectionProperties;
 import com.globant.bootcamp.patterns.builder.ConnectionProperties.ConnectionPropertiesBuilder;
@@ -24,8 +23,6 @@ import com.globant.bootcamp.repository.DBType;
  */
 @RunWith(Parameterized.class)
 public class ConnectionTest {
-
-    final static Logger logger = Logger.getLogger(ConnectionTest.class);
     
     private Connection connection;
     
@@ -57,7 +54,7 @@ public class ConnectionTest {
     @Test
     public void sqlConnect_validUser(){
         connection.connect();
-        assertThat(connection.getStatus(),is(equalTo(expected)));
+        assertThat(connection.isOpen(),is(equalTo(expected)));
     }
     
     @After
