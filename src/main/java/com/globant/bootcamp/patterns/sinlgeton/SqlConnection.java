@@ -30,7 +30,7 @@ public class SqlConnection implements Connection {
 			throw new IllegalArgumentException("Properties can't be null");
 		}
 		this.properties = properties;
-		this.url = properties.getUrl();
+		url = properties.getUrl();
 	}
 
 	public static Connection getInstance(ConnectionProperties properties) {
@@ -63,8 +63,9 @@ public class SqlConnection implements Connection {
     @Override
     public void close() {
         LOGGER.info("Closing connection for: {}", url);
-        this.open = false;
-        this.url = null;
+        open = false;
+        properties = null;
+        instance = null;
     }  
 }
 

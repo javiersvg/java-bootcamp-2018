@@ -30,13 +30,13 @@ public class PostgresConnection implements Connection {
 			throw new IllegalArgumentException("Properties can't be null");
 		}
 		this.properties = properties;
-		this.url = properties.getUrl();
+		url = properties.getUrl();
 	}
 
 	public static Connection getInstance(ConnectionProperties properties) {
 		if (instance == null) {
 			LOGGER.info("Creating static instance of Sql connection");
-			instance = new SqlConnection(properties);
+			instance = new PostgresConnection(properties);
 		}
 		return instance;
 	}
@@ -46,13 +46,15 @@ public class PostgresConnection implements Connection {
 	    ResourceBundle labels = ResourceBundle.getBundle("credentials");
 	    String user = labels.getString("postgres.user");
 	    String password = labels.getString("postgres.password");
+	    
 	    LOGGER.info("Using stub mysql connection class\n Connecting to mysql server with adress: {}", getUrl());
 	    try{
             Thread.sleep(1000);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-	    open = user.equals(properties.getUsername()) && password.equals(properties.getPassword());   
+	    open = user.equals(properties.getUsername()) && password.equals(properties.getPassword());
+	    
 	    if (isOpen()){
 	        LOGGER.info("User {} connected succesfully", properties.getUsername());
 	    } else {
@@ -63,7 +65,8 @@ public class PostgresConnection implements Connection {
     @Override
     public void close() {
         LOGGER.info("Closing connection for: {}", url);
-        this.open = false;
-        this.url = null;
+        open = false;
+        properties = null;
+        instance = null;
     }  
 }
