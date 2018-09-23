@@ -12,9 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import com.globant.bootcamp.patterns.builder.ConnectionProperties;
-import com.globant.bootcamp.patterns.builder.ConnectionProperties.ConnectionPropertiesBuilder;
-import com.globant.bootcamp.patterns.factory.FactoryProducer;
+import com.globant.bootcamp.patterns.builder.ConnectionBuilder;
 import com.globant.bootcamp.repository.Connection;
 import com.globant.bootcamp.repository.DBType;
 
@@ -26,13 +24,17 @@ public class ConnectionTest {
     
     private Connection connection;
     
-    private final ConnectionProperties credentials;
-    private final Enum<DBType> dbType;
+    private final String url;
+    private final String username;
+    private final String password;
+    private final DBType dbType;
     private final boolean expected;
     
-    public ConnectionTest(Enum<DBType> dbType, String url, String user, String password, boolean expected){
-        this.credentials = new ConnectionPropertiesBuilder(url, user, password).createConnectionProperties();
-        this.dbType = dbType;;
+    public ConnectionTest(DBType dbType, String url, String username, String password, boolean expected){
+        this.url = url;
+        this.username = username;
+        this.password = password;
+        this.dbType = dbType;
         this.expected = expected;
     }
     
@@ -48,7 +50,7 @@ public class ConnectionTest {
     
     @Before
     public void createConneciton(){
-        connection = FactoryProducer.getFactory(dbType).getConnection(this.credentials);
+        connection = new ConnectionBuilder(dbType, url, username, password).createConnection();
     }
     
     @Test

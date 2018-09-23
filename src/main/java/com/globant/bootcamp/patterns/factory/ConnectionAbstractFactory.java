@@ -1,8 +1,9 @@
 package com.globant.bootcamp.patterns.factory;
 
-import com.globant.bootcamp.patterns.builder.ConnectionProperties;
+import java.util.Properties;
+
 import com.globant.bootcamp.repository.Connection;
 
 public abstract class ConnectionAbstractFactory {
-	public abstract Connection getConnection(ConnectionProperties properties);
+	public abstract Connection getConnection(Properties properties);
 }

@@ -8,4 +8,8 @@ public interface Connection {
 	void close();
 	
 	String getUrl();
+	
+	enum PropertiesKey {
+	    URL, USER, PASSWORD, PREFETCH, ERRORS, DATEFORMAT
+	}
 }

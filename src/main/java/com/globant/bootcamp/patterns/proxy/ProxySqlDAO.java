@@ -26,7 +26,7 @@ public class ProxySqlDAO implements DAO {
     @Override
     public void save(Model thing) {
         if (realDAO == null) {
-			realDAO = new SqlDAO(this.connection);
+			realDAO = new SqlDAO(connection);
 		}
         realDAO.save(thing);
     }
@@ -34,7 +34,7 @@ public class ProxySqlDAO implements DAO {
     @Override
     public Object load(String objectId) {
         if (realDAO == null) {
-			realDAO = new SqlDAO(this.connection);
+			realDAO = new SqlDAO(connection);
 		}
         return realDAO.load(objectId);
     }
