@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import lombok.Getter;
+import lombok.NonNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +26,9 @@ public class PostgresConnection implements Connection {
 
 	@Getter private boolean open;
 
-	public PostgresConnection(Properties properties) {
-		if (properties == null) {
-			throw new IllegalArgumentException("Properties can't be null");
-		}
+	public PostgresConnection(@NonNull Properties properties) {
 		this.properties = properties;
-		url = properties.getProperty("");
+		url = properties.getProperty(PropertiesKey.URL.name());
 	}
 
 	public static Connection getInstance(Properties properties) {

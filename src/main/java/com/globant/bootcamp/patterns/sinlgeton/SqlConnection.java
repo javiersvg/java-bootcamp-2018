@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import lombok.Getter;
+import lombok.NonNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +26,7 @@ public class SqlConnection implements Connection {
 
 	@Getter private boolean open;
 
-	public SqlConnection(Properties properties) {
-		if (properties == null) {
-			throw new IllegalArgumentException("Properties can't be null");
-		}
+	public SqlConnection(@NonNull Properties properties) {
 		this.properties = properties;
 		url = properties.getProperty(PropertiesKey.URL.name());
 	}

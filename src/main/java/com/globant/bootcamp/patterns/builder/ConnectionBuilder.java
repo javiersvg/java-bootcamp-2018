@@ -2,6 +2,8 @@ package com.globant.bootcamp.patterns.builder;
 
 import java.util.Properties;
 
+import lombok.Getter;
+
 import com.globant.bootcamp.patterns.factory.FactoryProducer;
 import com.globant.bootcamp.repository.Connection;
 import com.globant.bootcamp.repository.DBType;
@@ -12,19 +14,19 @@ import com.globant.bootcamp.repository.DBType;
  */
 public class ConnectionBuilder {
 
-	private final DBType dbType;
+	@Getter private final DBType dbType;
 
-	private final String dbUrl;
+	@Getter private final String dbUrl;
 
-	private final String username;
+	@Getter private final String username;
 
-	private final String password;
+	@Getter private final String password;
 
-	private String prefetch = "false";
+	@Getter private String prefetch = "false";
 
-	private String logLevel = "DEBUG";
+	@Getter private String logLevel = "DEBUG";
 
-	private String dateFormat = "yyyy/MM/dd";
+	@Getter private String dateFormat = "yyyy/MM/dd";
 
 	/* Obligatory fields */
 	public ConnectionBuilder(final DBType newDbType, final String newDbUrl, final String newUsername,
