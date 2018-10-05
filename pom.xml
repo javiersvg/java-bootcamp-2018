@@ -13,5 +13,6 @@
   <modules>
       <module>topic-0</module>
       <module>topic-1</module>
+      <module>topic-2</module>
   </modules>
 </project>
