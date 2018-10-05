@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/javiersvg/java-bootcamp-2018.svg?style=svg)](https://circleci.com/gh/javiersvg/java-bootcamp-2018)
+
 # Java BootCamp base folders layout
 
 Please, use this repository as a base for you training phase. The idea is to
