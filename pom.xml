@@ -15,5 +15,6 @@
       <module>topic-1</module>
       <module>topic-2</module>
       <module>topic-3</module>
+      <module>topic-4</module>
   </modules>
 </project>
