@@ -1,0 +1,3 @@
+select concat ("Course: ", course_name, "\nTeacher: ", first_name, " ", last_name, "\nStudents:\n") from course join teacher on course.teacher_id = teacher.id where course.id = 1;
+select concat (first_name, " ", last_name) from course join registration on registration.course_id = course.id join student on registration.student_id = student.id where course.id = 1;
+select (SUM((first_note + second_note + third_note)/3 > 3)* 100 / count(*)) as aproved, ((count(*) - SUM((first_note + second_note + third_note)/3 > 3))* 100 / count(*)) as disaproved  from course join registration on registration.course_id = course.id join student on registration.student_id = student.id where course.id = 2;
