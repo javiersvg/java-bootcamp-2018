@@ -1,14 +1,15 @@
 package com.globant.bootcamp.repository;
 
-import java.util.Properties;
-
 public interface Connection {
-	/**
-	 * Tries to connect to a database using the given properties with keys for "user" and "password"
-	 */
-	void connect(Properties credentials);
+	void connect();
 
 	boolean isOpen();
 
+	void close();
+	
 	String getUrl();
+	
+	enum PropertiesKey {
+	    URL, USER, PASSWORD, PREFETCH, ERRORS, DATEFORMAT
+	}
 }
