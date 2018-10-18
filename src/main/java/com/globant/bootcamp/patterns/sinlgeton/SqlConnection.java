@@ -19,7 +19,7 @@ public class SqlConnection implements Connection {
 	private static Connection instance;
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SqlConnection.class);
-    
+
     private Properties properties;
 
 	@Getter private String url;
@@ -66,6 +66,3 @@ public class SqlConnection implements Connection {
         instance = null;
     }  
 }
-
-
-
