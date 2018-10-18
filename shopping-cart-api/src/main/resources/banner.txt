@@ -1,0 +1,6 @@
+${AnsiColor.BRIGHT_YELLOW}    \________
+${AnsiColor.BRIGHT_YELLOW} ~   \######/
+${AnsiColor.BRIGHT_YELLOW}  ~   |####/
+${AnsiColor.BRIGHT_YELLOW} ~    |____.
+${AnsiColor.WHITE}______o____o_______
+${AnsiColor.BRIGHT_GREEN}:: Hello! :: Running Spring Boot ${spring-boot.version} :: \ö/${AnsiColor.BLACK}
